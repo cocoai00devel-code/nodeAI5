@@ -1,0 +1,117 @@
+/* imasan_style.css */
+
+/* ================================================= */
+/* 共通設定 */
+/* ================================================= */
+body {
+    cursor: none; /* デフォルトのカーソルを消す */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #a0d8ef; 
+    font-family: sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* 全体のステッキ位置制御 */
+#magic-stick, #magic-tip {
+    position: absolute;
+    pointer-events: none;
+}
+
+/* 魔法少女ステッキ本体 */
+#magic-stick {
+    width: 140px;
+    height: 12px;
+    background: linear-gradient(90deg, #c39bff 0%, #ffb3ec 50%, #ff7ada 100% );
+    border-radius: 999px;
+    pointer-events: none;
+    /* 回転中心を右端に設定 */
+    transform-origin: right center; 
+    transform: rotate(-30deg); 
+    box-shadow: 0 0 6px rgba(255, 140, 255, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.8);
+    /* 親コンテナ(手の位置)からの相対位置調整 */
+    left: -120px; 
+    top: 12px;
+}
+
+/* ステッキ先端：光る星 */
+#magic-tip {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    pointer-events: none;
+    /* 星形（CSS clip-path） */
+    clip-path: polygon(
+        50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 
+        50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+    );
+    background: radial-gradient(circle, #fff7ff 0%, #ffe3ff 40%, #ff9bff 70%, #ff47d8 100% );
+    box-shadow: 0 0 12px #ff9bff, 0 0 22px #ff47d8, 0 0 45px #ff47d8;
+    animation: tip-rainbow 1.8s linear infinite;
+    pointer-events: none;
+    z-index: 999;
+    /* tipの中心が親コンテナの原点に来るように調整 */
+    transform: translate(-50%, -50%);
+}
+
+/* ステッキ先端の脈動アニメーション */
+@keyframes tip-rainbow {
+    0% { filter: hue-rotate(0deg) brightness(1.1); transform: scale(1) translate(-50%, -50%); }
+    50% { filter: hue-rotate(180deg) brightness(1.4); transform: scale(1.05) translate(-50%, -50%); }
+    100% { filter: hue-rotate(360deg) brightness(1.1); transform: scale(1.15) translate(-50%, -50%); }
+}
+
+/* フィードバック用の表示 */
+#feedback-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4em;
+    color: #ff007f;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    z-index: 101;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* フェードアウト用クラス */
+.hidden {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+/* クリック時のフィードバック */
+.show-feedback {
+    opacity: 1 !important;
+}
+
+/* パーティクル */
+#magic-particles .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle,#fff7ff,#ff47d8);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    pointer-events:none;
+    animation: moveParticle 1s linear forwards;
+    z-index: 998;
+}
+
+/* パーティクルの移動アニメーション */
+@keyframes moveParticle {
+    to {
+        transform: translate(var(--dx), var(--dy)) scale(0);
+        opacity:0;
+    }
+}
+
+/* その他のスタイル */
+h1 { margin:0; font-size:24px; color:#0a74da; }
+p { font-size:16px; color:#333; text-align:center; max-width:600px; }

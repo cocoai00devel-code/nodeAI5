@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔法少女ジェスチャーマウス (安定版)</title>
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <video id="video-input" style="display:none;"></video>
+    
+    <canvas id="output-canvas" width="640" height="480" style="
+        border: 2px solid #ff47d8; 
+        position: fixed; 
+        top: 20px; 
+        right: 20px; 
+        z-index: 99;
+    "></canvas>
+    
+    <div id="magic-stick-container" data-x="0" data-y="0">
+        <div id="magic-tip"></div>
+        <div id="magic-stick"></div>
+    </div>
+
+    <div id="feedback-overlay"></div>
+    
+    <div style="height: 200vh; width: 80vw; text-align: center; margin-top: 100px;">
+        <h1 style="color: #ff47d8;">安定版：両手対応・拍手クリックテスト</h1>
+        <p>どちらかの人差し指でステッキを動かし、両手で縦に2回拍手をしてクリックを試してください。</p>
+        
+        <button id="test-button" style="padding: 20px; font-size: 2em; margin-top: 50px;">
+            拍手でクリック！
+        </button>
+        
+        <a href="#" style="display: block; font-size: 1.5em; margin: 30px;">
+            テスト用リンク
+        </a>
+
+        <div style="height: 1000px; background: #ffe3ff; padding-top: 10px; margin-top: 50px;">
+            <h2>スクロールテストエリア</h2>
+            <p>ページをスクロールして確認できます。</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <script>
+        document.getElementById('test-button').addEventListener('click', () => {
+            alert('ボタンがクリックされました！');
+        });
+    </script>
+</body>
+</html>

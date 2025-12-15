@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KS903 PWA</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/gif" href="image/favicon.gif">
+</head>
+<body>
+
+  <!-- 魔法ステッキ & パーティクル -->
+  <div id="magic-stick"></div>
+  <div id="magic-tip"></div>
+  <div id="magic-particles"></div>
+
+  <!-- SVG 顔パーツ -->
+  <svg width="600" height="600" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="rainbow-fill" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="red"/>
+        <stop offset="16.6%" stop-color="orange"/>
+        <stop offset="32%" stop-color="yellow"/>
+        <stop offset="48%" stop-color="green"/>
+        <stop offset="64%" stop-color="blue"/>
+        <stop offset="80%" stop-color="indigo"/>
+        <stop offset="100%" stop-color="violet"/>
+      </linearGradient>
+      <linearGradient id="rainbow-nose" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="red" />
+        <stop offset="100%" stop-color="orange" />
+      </linearGradient>
+    </defs>
+
+    <!-- 顔のパーツ -->
+    <ellipse cx="245" cy="52" rx="15" ry="20" fill="white"/>
+    <ellipse cx="315" cy="52" rx="15" ry="20" fill="white"/>
+
+    <!-- 目 -->
+    <ellipse class="iris" id="eye-left" cx="245" cy="52" rx="5" ry="12" fill="red" stroke="black" stroke-width="1.5"/>
+    <ellipse class="iris" id="eye-right" cx="315" cy="52" rx="5" ry="12" fill="red" stroke="black" stroke-width="1.5"/>
+
+    <!-- 鼻 -->
+    <circle id="nose" cx="280" cy="85" r="14" fill="url(#rainbow-nose)" stroke="url(#rainbow-nose)" stroke-width="2.5" />
+
+    <!-- レイン棒 -->
+    <line id="rain-line1" x1="30" y1="80" x2="180" y2="110" stroke="black" stroke-width="3" visibility="hidden"/>
+    <line id="rain-line2" x1="30" y1="130" x2="180" y2="130" stroke="black" stroke-width="2" visibility="hidden"/>
+    <line id="rain-line3" x1="30" y1="180" x2="180" y2="150" stroke="black" stroke-width="3" visibility="hidden"/>
+    <line id="rain-line4" x1="340" y1="110" x2="503" y2="80" stroke="black" stroke-width="3" visibility="hidden"/>
+    <line id="rain-line5" x1="340" y1="130" x2="520" y2="130" stroke="black" stroke-width="2" visibility="hidden"/>
+    <line id="rain-line6" x1="340" y1="150" x2="520" y2="180" stroke="black" stroke-width="3" visibility="hidden"/>
+    <line id="rain-line7" x1="280" y1="100" x2="280" y2="150" stroke="black" stroke-width="2" visibility="hidden"/>
+  </svg>
+
+  <!-- QR画像 -->
+  <div style="margin-top:20px; display:flex; justify-content:center; gap:20px;">
+    <img src="image/qr1.png" width="180">
+    <img src="image/qr2.png" width="180">
+    <img src="image/qr3.png" width="180">
+  </div>
+
+<script>
+// ===== 目の虹色ループ =====
+const colors = ["red","orange","yellow","green","blue","indigo","violet"];
+let eyeIndex = 0;
+setInterval(() => {
+  document.getElementById("eye-left").setAttribute("fill", colors[eyeIndex]);
+  document.getElementById("eye-right").setAttribute("fill", colors[eyeIndex]);
+  eyeIndex = (eyeIndex + 1) % colors.length;
+}, 300);
+
+// ===== 鼻ホバーでレイン棒 =====
+const nose = document.getElementById("nose");
+const lines = [
+  "rain-line1","rain-line2","rain-line3",
+  "rain-line4","rain-line5","rain-line6","rain-line7"
+].map(id => document.getElementById(id));
+
+let hoverInterval;
+
+nose.addEventListener("mouseenter", () => {
+  lines.forEach(line => line.setAttribute("visibility","visible"));
+  if(hoverInterval) return; // すでに動いていたら無視
+  hoverInterval = setInterval(() => {
+    lines.forEach(line => line.setAttribute("stroke", colors[eyeIndex]));
+    eyeIndex = (eyeIndex + 1) % colors.length;
+  }, 300);
+});
+
+nose.addEventListener("mouseleave", () => {
+  lines.forEach(line => line.setAttribute("visibility","hidden"));
+  clearInterval(hoverInterval);
+  hoverInterval = null;
+});
+
+// ===== ステッキと星 =====
+let angle = 0;
+const radius = 18;
+document.addEventListener("mousemove", e => {
+  const stick = document.getElementById("magic-stick");
+  const stickX = e.pageX - 140;
+  const stickY = e.pageY - 10;
+  stick.style.left = stickX + "px";
+  stick.style.top  = stickY + "px";
+  window.tipBaseX = stickX + 140;
+  window.tipBaseY = stickY + 6;
+});
+
+// 星先端運動 + パーティクル生成
+setInterval(() => {
+  const tip = document.getElementById("magic-tip");
+  if(!window.tipBaseX) return;
+  angle += 0.1;
+  const x = window.tipBaseX + Math.cos(angle)*radius;
+  const y = window.tipBaseY + Math.sin(angle)*radius;
+  tip.style.left = x + "px";
+  tip.style.top  = y + "px";
+  spawnParticle(x, y);
+}, 30); // 30msごとに生成
+
+function spawnParticle(x,y){
+  const container = document.getElementById("magic-particles");
+  const particle = document.createElement("div");
+  particle.className = "particle";
+  const angle = Math.random()*2*Math.PI;
+  const speed = Math.random()*2+1;
+  particle.style.left = x+"px";
+  particle.style.top = y+"px";
+  particle.style.setProperty("--dx", Math.cos(angle)*speed+"px");
+  particle.style.setProperty("--dy", Math.sin(angle)*speed+"px");
+  container.appendChild(particle);
+  setTimeout(()=>particle.remove(),1000);
+}
+</script>
+
+</body>
+</html>

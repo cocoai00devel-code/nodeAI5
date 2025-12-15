@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NonMouse - Web Simulation (完全版)</title>
+    
+    <link rel="stylesheet" href="imasan_style.css"> 
+    
+    <style>
+        /* HTML内での追加スタイル */
+        body { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #a0d8ef; /* CSSと同期 */
+            overflow: hidden; /* カーソルが画面外に出るのを防ぐ */
+        }
+        video { 
+            display: none; /* カメラ映像は完全に非表示 */
+        }
+        #output_canvas { 
+            /* 検出結果の描画エリア */
+            border: 3px solid #333; 
+            background-color: #ffffff; 
+            width: 640px; 
+            height: 480px;
+        }
+        .info {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+        /* JSで動かす親コンテナ */
+        #magic-stick-container {
+            position: fixed; 
+            pointer-events: none; 
+            z-index: 100;
+        }
+    </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>🖐️ NonMouse Web シミュレーション（完全版）</h1>
+    <p class="info">※ 人差し指でステッキを動かし、親指と人差し指のピンチでクリックをシミュレート。</p>
+    
+    <video id="input_video"></video>
+    <canvas id="output_canvas" width="640" height="480"></canvas>
+    
+    <div id="magic-stick-container">
+        <div id="magic-stick"></div>
+        <div id="magic-tip"></div>
+        <div id="magic-particles"></div> 
+    </div>
+    
+    <div id="feedback-overlay" class="hidden">✨ CLICK! ✨</div>
+    
+    <script src="nonmouse2.js"></script>
+</body>
+</html>

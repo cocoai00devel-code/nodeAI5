@@ -1,0 +1,85 @@
+/* ================================================= */
+body {
+    cursor: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    background: #a0d8ef;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+/* 全体のステッキ位置制御 */
+#magic-stick-container {
+    position: fixed; 
+    pointer-events: none;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+
+/* 魔法少女ステッキ本体 */
+#magic-stick {
+    width: 140px;
+    height: 12px;
+    background: linear-gradient(90deg, #c39bff 0%, #ffb3ec 50%, #ff7ada 100% );
+    border-radius: 999px;
+    pointer-events: none;
+    transform-origin: right center; 
+    transform: rotate(-30deg); 
+    box-shadow: 0 0 6px rgba(255, 140, 255, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.8);
+    position: absolute;
+    left: -120px; 
+    top: 12px;
+}
+
+/* ステッキ先端：光る丸 */
+#magic-tip {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    pointer-events: none;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    background: radial-gradient(circle, #fff7ff 0%, #ffe3ff 40%, #ff9bff 70%, #ff47d8 100% );
+    box-shadow: 0 0 12px #ff9bff, 0 0 22px #ff47d8, 0 0 45px #ff47d8;
+    animation: tip-rainbow 1.8s linear infinite;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+}
+
+/* フィードバック用の表示 */
+#feedback-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    font-weight: bold;
+    color: #ff007f;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    z-index: 101;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+/* クリック時のフィードバック */
+.show-feedback {
+    opacity: 1 !important;
+}
+
+/* ステッキ先端のアニメーション */
+@keyframes tip-rainbow {
+    0% { filter: hue-rotate(0deg) brightness(1.1); transform: scale(1) translate(-50%, -50%); }
+    50% { filter: hue-rotate(180deg) brightness(1.4); transform: scale(1.05) translate(-50%, -50%); }
+    100% { filter: hue-rotate(360deg) brightness(1.1); transform: scale(1.15) translate(-50%, -50%); }
+}
+
+/* デバッグ用キャンバスは小さく表示 */
+#output-canvas {
+    width: 160px;
+    height: 120px;
+}

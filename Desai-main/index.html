@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS903 PWA</title>
+    
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="imasan_style.css">
+    
+        <!-- <div id="magic-tip"></div>
+        <div id="magic-stick"> </div>
+        <div id="magic-particles"></div> -->
+   
+    
+    <!-- <link rel="icon" href="design_icon.svg" type="image/svg+xml"> -->
+     <!-- <link rel="icon" href="/favicon.gif" type="image/gif"> -->
+    <link rel="icon" type="image/gif" href="image/favicon.gif">
+    <!-- <link rel="shortcut icon" href="/favicon.gif" type="image/gif"> -->
+</head>
+<!-- <body  id="magic-stick" id="magic-tip"> -->
+<body >
+
+  <!-- 魔法ステッキ & パーティクル -->
+  <div id="magic-stick"></div>
+  <div id="magic-tip"></div>
+  <div id="magic-particles"></div>
+
+    
+<svg width="600" height="600" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+    <linearGradient id="rainbow-fill" class="flow-rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:red" />
+        <stop offset="16.6%" style="stop-color:orange" />
+        <stop offset="100%" style="stop-color:violet" />
+    </linearGradient>
+</defs>
+     <defs>
+        <linearGradient id="rainbow-fill2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:red" />
+            <stop offset="16%" style="stop-color:orange" />
+            <stop offset="32%" style="stop-color:yellow" />
+            <stop offset="48%" style="stop-color:green" />
+            <stop offset="64%" style="stop-color:blue" />
+            <stop offset="80%" style="stop-color:indigo" />
+            <stop offset="100%" style="stop-color:violet" />
+        </linearGradient>
+    </defs>
+    <defs>
+    <linearGradient id="rainbow-nose" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop id="nose-stop1" offset="0%" stop-color="red" />
+        <stop id="nose-stop2" offset="100%" stop-color="orange" />
+    </linearGradient>
+</defs>
+    
+    <path
+        d="M 50 200 A 250 250 0 0 1 550 200"
+        fill="none"
+        stroke="url(#rainbow-fill2)"
+        stroke-width="3"
+        stroke-linecap="round"
+    />
+    <!-- <path
+        d="M 0  0 A 50 50 0 0 1 350 200"
+        fill="none"
+        stroke="black"
+        stroke-width="3"
+        stroke-linecap="round"
+    /> -->
+    <ellipse cx="245" cy="52" rx="15" ry="20" fill="white" stroke="" stroke-width="1.5"/>
+    
+    <ellipse cx="315" cy="52" rx="15" ry="20" fill="white" stroke="" stroke-width="1.5"/>
+
+    <!-- <ellipse cx="245" cy="52" rx="5" ry="10" fill="" stroke="black" stroke-width="1.5"/> -->
+    <!-- <ellipse class="iris" cx="245" cy="52" rx="5" ry="10" stroke="black" stroke-width="1.5"/> -->
+    <!-- <ellipse class="iris" cx="315" cy="52" rx="5" ry="10" stroke="black" stroke-width="1.5"/> -->
+    <!-- <ellipse class="iris" cx="245" cy="52" rx="5" ry="12" fill="" stroke="black" stroke-width="1.5"/> -->
+    <!-- <ellipse class="iris" cx="245" cy="52" rx="5" ry="12" fill="url(#rainbow-fill)" stroke="black" stroke-width="1.5">
+    <animate attributeName="ry" 
+             values="12; 12; 0.1; 12" 
+             keyTimes="0; 0.95; 0.97; 1" 
+             dur="3s" 
+             repeatCount="indefinite"/>
+</ellipse>
+<ellipse class="iris" cx="315" cy="52" rx="5" ry="12" fill="url(#rainbow-fill)" stroke="black" stroke-width="1.5">  
+       #fill="" -->
+    <!-- <animate attributeName="ry" 
+             values="12; 12; 0.1; 12" 
+             keyTimes="0; 0.95; 0.97; 1" 
+             dur="3s" 
+             repeatCount="indefinite"/>
+</ellipse> --> 
+    <!-- <ellipse class="iris" cx="315" cy="52" rx="5" ry="12" fill="" stroke="black" stroke-width="1.5"/> -->
+    
+    
+    <ellipse class="iris" id="eye-right" cx="315" cy="52" rx="5" ry="12" fill="url(#rainbow-fill)" stroke="" stroke-width="1.5">  
+        <animate attributeName="ry" 
+                 values="12; 12; 0.1; 12" 
+                 keyTimes="0; 0.95; 0.97; 1" 
+                 dur="3s" 
+                 repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse class="iris" id="eye-left" cx="245" cy="52" rx="5" ry="12" fill="url(#rainbow-fill)" stroke="" stroke-width="1.5">
+    <animate attributeName="ry" 
+              values="12; 12; 0.1; 12" 
+              keyTimes="0; 0.95; 0.97; 1" 
+              dur="3s" 
+              repeatCount="indefinite"/>
+</ellipse>
+    <!-- <ellipse cx="315" cy="52" rx="5" ry="10" fill="" stroke="black" stroke-width="1.5"/> -->
+    <line id="rain-line1" x1="30" y1="80" x2="180" y2="110" stroke="black" stroke-width="3" />
+    <line id="rain-line2"　x1="30" y1="130" x2="180" y2="130" stroke="black" stroke-width="2"/>
+    <line id="rain-line3" x1="30" y1="180" x2="180" y2="150" stroke="black" stroke-width="3"/> 
+    <!-- <line id="rain-line4"　x2="503" y2="80" x1="340" y1="110" stroke="black" stroke-width="3"/>  -->
+    <!-- <line id="rain-line5"　x2="520" y2="130" x1="340" y1="130" stroke="black" stroke-width="2"/>  -->
+    <!-- <line id="rain-line6"　x2="520" y2="180" x1="340" y1="150" stroke="black" stroke-width="3"/> -->
+    <line id="rain-line4" x1="340" y1="110" x2="503" y2="80" stroke="black" stroke-width="3" />
+    <line id="rain-line5" x1="340" y1="130" x2="520" y2="130" stroke="black" stroke-width="2" />
+    <line id="rain-line6" x1="340" y1="150" x2="520" y2="180" stroke="black" stroke-width="3" />
+    
+    <!-- <line x2="300" y2="80" x1="180" y1="110" stroke="black" stroke-width="3"/>
+    <line x2="300" y2="130" x1="180" y1="130" stroke="black" stroke-width="2"/>
+    <line x2="300" y2="180" x1="180" y1="150" stroke="black" stroke-width="3"/>  -->
+
+    <!-- <circle cx="280" cy="85" r="14" fill="url(#rainbow-fill2)" stroke="url(#rainbow-fill2)" stroke-width="2.5"/> -->
+    <circle id="nose" cx="280" cy="85" r="14" fill="url(#rainbow-nose)" stroke="url(#rainbow-nose)" stroke-width="2.5" />
+
+    <text x="105" y="82" font-family="Arial, sans-serif" font-size="46" font-weight="1.5" fill="url(#rainbow-fill2)" ><!-- </text>transform="rotate(-10 100 140)"> -->
+           K  S -      
+    </text>
+ <text x="215" y="98" font-family="Arial, sans-serif" font-size="96" font-weight="1.5" fill="url(#rainbow-fill2)" transform="rotate(0 30 50)"> 
+           9      
+    </text>
+    <text x="290" y="94" font-family="Arial, sans-serif" font-size="96" font-weight="1.5" fill="url(#rainbow-fill2)" ><!-- </text>transform="rotate(-10 100 140)"> -->
+            0      
+    </text>
+    <text x="360" y="92" font-family="Arial, sans-serif" font-size="96" font-weight="1.5" fill="url(#rainbow-fill2)" ><!-- </text>transform="rotate(-10 100 140)"> -->
+            3    
+    </text>
+    <line id="rain-line7" x1="280" y1="100" x2="280" y2="150" stroke="black" stroke-width="2" />
+    
+    <!-- <text x="270" y="90" font-family="MS Gothic, sans-serif" font-size="24" fill="black">
+        自
+    </text> -->
+
+    <!-- <line x1="450" y1="100" x2="450" y2="150" stroke="black" stroke-width="2"/> -->
+    <!-- <text x="440" y="90" font-family="MS Gothic, sans-serif" font-size="24" fill="black">
+        青
+    </text> -->
+
+    <!-- <line x1="540" y1="190" x2="560" y2="210" stroke="black" stroke-width="3"/> -->
+    <!-- <line x1="560" y1="190" x2="540" y2="210" stroke="black" stroke-width="3"/> -->
+
+    <!-- <line x1="40" y1="190" x2="60" y2="210" stroke="black" stroke-width="3"/> -->
+    <!-- <line x1="60" y1="190" x2="40" y2="210" stroke="black" stroke-width="3"/> -->
+
+</svg>    <!-- <div class="icon-container">
+        <svg id="animated-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+            
+            <path d="M 30 100 A 70 70 0 0 1 170 100" fill="none" stroke="black" stroke-width="2"/>
+
+            <path d="M 40 100 L 40 130 M 40 115 L 50 105 M 40 115 L 50 125" fill="none" stroke="black" stroke-width="2"/>
+            <path d="M 55 105 Q 60 100 65 105 Q 70 110 65 115 Q 60 120 65 125" fill="none" stroke="black" stroke-width="2"/>
+            <line x1="70" y1="115" x2="75" y2="115" stroke="black" stroke-width="2"/>
+            <circle cx="85" cy="115" r="7" fill="none" stroke="black" stroke-width="2"/>
+            <circle cx="98" cy="115" r="7" fill="none" stroke="black" stroke-width="2"/>
+            <path d="M 110 110 Q 115 105 120 110 Q 115 115 120 120 Q 115 125 110 120" fill="none" stroke="black" stroke-width="2"/>
+            <path d="M 125 125 L 130 105 L 135 125 M 127 115 L 133 115" fill="none" stroke="black" stroke-width="2"/>
+            <path d="M 140 125 L 145 105 L 150 125 M 142 115 L 148 115" fill="none" stroke="black" stroke-width="2"/>
+
+            <circle id="red-dot" cx="85" cy="95" r="5" fill="red" stroke="black" stroke-width="1"/>
+
+            <line x1="20" y1="100" x2="25" y2="100" stroke="black" stroke-width="2"/>
+            <line x1="28" y1="100" x2="33" y2="100" stroke="black" stroke-width="2"/>
+            <line x1="175" y1="100" x2="180" y2="100" stroke="black" stroke-width="2"/>
+            <line x1="183" y1="100" x2="188" y2="100" stroke="black" stroke-width="2"/>
+
+            <text x="105" y="80" font-size="14" fill="black">白</text>
+            <line x1="107" y1="85" x2="107" y2="95" stroke="black" stroke-width="1.5"/>
+            <text x="125" y="90" font-size="14" fill="black">青</text>
+            <line x1="127" y1="95" x2="127" y2="105" stroke="black" stroke-width="1.5"/>
+
+            <text x="110" y="30" font-size="12" fill="black">・まばたきする</text>
+            <text x="110" y="45" font-size="12" fill="black">・目玉を動かして</text>
+            <text x="110" y="60" font-size="12" fill="black">　キョロキョロさせる</text>
+        </svg> -->
+    <div style="margin-top:20px; display:flex; justify-content:center; gap:20px;">
+    <img src="image/qr1.png" width="180">
+    <img src="image/qr2.png" width="180">
+    <img src="image/qr3.png" width="180">
+</div>
+<script>
+// JSで目の色をレインボーループさせる
+const colors = [
+    "red", "orange", "yellow",
+    "green", "blue", "indigo", "violet"
+];
+
+let i = 0;
+setInterval(() => {
+    const left = document.getElementById("eye-left");
+    const right = document.getElementById("eye-right");
+
+    left.setAttribute("fill", colors[i]);
+    right.setAttribute("fill", colors[i]);
+
+    i = (i + 1) % colors.length;
+}, 300);
+
+// 対象要素を取得
+const nose = document.getElementById("nose");
+const tip = document.getElementById("magic-tip");
+const particles = document.getElementById("magic-particles");
+
+
+
+// レイン棒
+// const lines = ["rain-line1","rain-line2","rain-line3",
+//   "rain-line4","rain-line5","rain-line6","rain-line7"
+// ].map(id => document.getElementById(id));
+const lines = ["rain-line1","rain-line2","rain-line3","rain-line4","rain-line5","rain-line6","rain-line7"]
+              .map(id => document.getElementById(id));
+
+const colorline = ["red","orange","yellow","green","blue","indigo","violet"];
+// 線ごとにスタートインデックスをずらす
+// 線ごとに色変更のスピードをランダムで設定（200〜500msくらい）
+let lineIndexes = lines.map((_, i) => i % colorline.length);
+// let eyeIndex = 0;
+let lineSpeeds = lines.map(() => 200 + Math.random() * 300);
+let hoverIntervals = [];
+
+
+// ... 既存のコード（nose.addEventListener の後くらい） ...
+
+// 目の要素を取得
+const eyeLeft = document.getElementById("eye-left");
+const eyeRight = document.getElementById("eye-right");
+const eyes = [
+    { el: eyeLeft, cx: 245, cy: 52 }, // 左目 (元のcx, cy)
+    { el: eyeRight, cx: 315, cy: 52 }  // 右目 (元のcx, cy)
+];
+
+// キョロキョロアニメーション用のタイマーと、マウス追尾解除用のタイマー
+let lookInterval;
+let mouseMoveTimer;
+const MOUSE_STOP_DELAY = 150; // マウスが停止したと判断するミリ秒
+
+// 目の追尾を停止し、元のキョロキョロアニメーションを開始する関数
+function startLookingAnimation() {
+    if (lookInterval) return; // すでにアニメーション中なら何もしない
+
+    // 追尾で設定されたtransformをリセット
+    eyes.forEach(eye => {
+        eye.el.style.transform = 'translateX(0)';
+    });
+    
+    // キョロキョロアニメーションを再現する処理を開始
+    let currentPos = 0;
+    let direction = 1; // 1:右へ, -1:左へ
+    const maxLookOffset = 5; // キョロキョロの最大移動量 (CSS @keyframes look と合わせる)
+    const step = 0.5; // 移動ステップ
+
+    lookInterval = setInterval(() => {
+        currentPos += direction * step;
+
+        if (currentPos >= maxLookOffset) {
+            currentPos = maxLookOffset;
+            direction = -1;
+        } else if (currentPos <= -maxLookOffset) {
+            currentPos = -maxLookOffset;
+            direction = 1;
+        }
+
+        eyes.forEach(eye => {
+            eye.el.style.transform = `translateX(${currentPos}px)`;
+        });
+    }, 50); // アニメーションの滑らかさに応じて調整
+}
+
+// 目の追尾アニメーションを停止する関数
+function stopLookingAnimation() {
+    if (lookInterval) {
+        clearInterval(lookInterval);
+        lookInterval = null;
+    }
+}
+
+
+// --- 実行ロジック ---
+
+// 1. ページロード時にキョロキョロアニメーションを開始
+startLookingAnimation();
+
+// 2. マウス移動時の処理
+document.addEventListener("mousemove", (e) => {
+    // マウスが動いたらキョロキョロアニメを停止
+    stopLookingAnimation();
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    // 目の追尾処理
+    eyes.forEach(eye => {
+        const eyeRect = eye.el.getBoundingClientRect();
+        
+        // SVG要素内の中心座標を取得（画面座標からSVG内部座標へ変換が必要だが、ここでは簡略化）
+        // 実際にはSVGの位置、スケールを考慮すべきですが、ここではブラウザ上の目の中心位置を基準にします。
+        const eyeCenterX = eyeRect.left + eyeRect.width / 2;
+        const eyeCenterY = eyeRect.top + eyeRect.height / 2;
+
+        // マウスと目の中心間の角度を計算
+        const angle = Math.atan2(mouseY - eyeCenterY, mouseX - eyeCenterX);
+        
+        // 目の移動距離を制限 (外枠から出ないように)
+        const maxOffset = 5; // 追尾の最大移動量
+        const offsetX = Math.cos(angle) * maxOffset;
+        const offsetY = Math.sin(angle) * maxOffset;
+
+        // 追尾で目を移動させる
+        eye.el.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+
+    // マウス移動停止タイマーをリセット
+    clearTimeout(mouseMoveTimer);
+    
+    // MOUSE_STOP_DELAY 後にキョロキョロアニメを再開するタイマーを設定
+    mouseMoveTimer = setTimeout(() => {
+        startLookingAnimation();
+    }, MOUSE_STOP_DELAY);
+
+});
+// let hoverInterval;
+// const line1 = document.getElementById("rain-line1");
+// const line2 = document.getElementById("rain-line2");
+// const line3 = document.getElementById("rain-line3");
+// const line4 = document.getElementById("rain-line4");
+// const line5 = document.getElementById("rain-line5");
+// const line6 = document.getElementById("rain-line6");
+// const line7 = document.getElementById("rain-line7");
+
+
+
+// 後でやる
+// const nose = document.getElementById("nose");
+// const lines = ["rain-line1","rain-line2","rain-line3","rain-line4","rain-line5","rain-line6","rain-line7"]
+//               .map(id => document.getElementById(id));
+
+// const colors = ["red","orange","yellow","green","blue","indigo","violet"];
+
+// // 線ごとにスタートインデックスをずらす
+// let lineIndexes = lines.map((_, i) => i % colors.length);
+
+// // 線ごとに色変更のスピードをランダムで設定（200〜500msくらい）
+// let lineSpeeds = lines.map(() => 200 + Math.random() * 300);
+
+// let hoverIntervals = [];
+
+// // 鼻ホバーでレイン棒虹色
+// nose.addEventListener("mouseenter", () => {
+//   lines.forEach(line => line.setAttribute("visibility","visible"));
+
+//   // すでに動いていたら無視
+//   if(hoverIntervals.length) return;
+
+//   // 線ごとに個別でsetInterval
+//   lines.forEach((line, i) => {
+//     const interval = setInterval(() => {
+//       line.setAttribute("stroke", colors[lineIndexes[i]]);
+//       lineIndexes[i] = (lineIndexes[i] + 1) % colors.length;
+//     }, lineSpeeds[i]);
+//     hoverIntervals.push(interval);
+//   });
+// });
+
+// nose.addEventListener("mouseleave", () => {
+//   lines.forEach(line => line.setAttribute("visibility","hidden"));
+//   // すべての線のインターバルをクリア
+//   hoverIntervals.forEach(interval => clearInterval(interval));
+//   hoverIntervals = [];
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const particles = document.querySelectorAll(".magic-particle");
+nose.addEventListener("mouseenter", () => {
+// 速度を2秒に変更
+nose.style.animationDuration = "2s";
+// アニメーションを付与
+nose.classList.add("rainbow-flow");
+tip.classList.add("hidden");
+const allParticles = document.querySelectorAll("#magic-particles .particle");
+    allParticles.forEach(p => p.classList.add("hidden-particle"));
+// レイン棒を鼻に合わせて表示
+    const cx = nose.cx.baseVal.value;
+    const cy = nose.cy.baseVal.value;
+    
+    lines.forEach(line => line.setAttribute("visibility","visible"));
+    if(hoverIntervals.length) return; // if(hoverInterval) return;
+    // hoverInterval = setInterval(() => {
+    //     lines.forEach(line => line.setAttribute("stroke", colorline[lineIndexes[i]]));//, colorline[eyeIndex]));
+    //     lineIndexes[i] = (lineIndexes[i] + 1) % colors.length; // 次の色に進める
+    //     // eyeIndex = (eyeIndex + 1) % colorline.length;
+    // }, 100);
+    lines.forEach((line, i) => {
+    const interval = setInterval(() => {
+      line.setAttribute("stroke", colorline[lineIndexes[i]]);
+      lineIndexes[i] = (lineIndexes[i] + 1) % colorline.length;
+    }, lineSpeeds[i]);
+    hoverIntervals.push(interval);
+  }, 100);
+// });
+//     lines.forEach(line => line.setAttribute("visibility","visible"));
+//   if(hoverInterval) return; // すでに動いていたら無視
+//   hoverInterval = setInterval(() => {
+//     lines.forEach(line => line.setAttribute("stroke", colors[eyeIndex]));
+//     eyeIndex = (eyeIndex + 1) % colors.length;
+//   }, 300);
+// setInterval(() => {    
+//     line1.setAttribute("fill", colors[i]);
+//     line2.setAttribute("fill", colors[i]);
+//     line3.setAttribute("fill", colors[i]);
+//     line4.setAttribute("fill", colors[i]);
+//     line5.setAttribute("fill", colors[i]);
+//     line6.setAttribute("fill", colors[i]);
+//     line7.setAttribute("fill", colors[i]);
+
+//     i = (i + 1) % colors.length;
+// }, 300);
+particles.forEach(p => p.classList.add("hidden"));
+});
+nose.addEventListener("mouseleave", () => {
+  nose.classList.remove("rainbow-flow");
+  tip.classList.remove("hidden");
+  const allParticles = document.querySelectorAll("#magic-particles .particle");
+    allParticles.forEach(p => p.classList.remove("hidden-particle"));
+
+    //  lines.forEach(line => line.setAttribute("stroke", "black"));
+     lines.forEach(line => line.setAttribute("stroke", "black"));
+     hoverIntervals.forEach(interval => clearInterval(interval));
+    // clearInterval(hoverInterval);
+    hoverIntervals = [];
+    // hoverInterval = null;
+
+    // nose.addEventListener("mouseleave", () => {
+//   lines.forEach(line => line.setAttribute("visibility","hidden"));
+//   // すべての線のインターバルをクリア
+//   hoverIntervals.forEach(interval => clearInterval(interval));
+//   hoverIntervals = [];
+// });
+        
+    // line1.setAttribute("visibility", "hidden");
+    // line2.setAttribute("visibility", "hidden");
+    // line3.setAttribute("visibility", "hidden");
+
+    // particles.forEach(p => p.classList.remove("hidden"));
+
+
+
+});
+
+
+
+// ======== JS: ステッキ & 星 ========
+let angle = 0;
+const radius = 18;
+
+document.addEventListener("mousemove", (e) => {
+    const stick = document.getElementById("magic-stick");
+
+    const stickX = e.pageX - 140;
+    const stickY = e.pageY - 10;
+
+    stick.style.left = stickX + "px";
+    stick.style.top  = stickY + "px";
+
+    window.tipBaseX = stickX + 140;
+    window.tipBaseY = stickY + 6;
+});
+
+// 星先端の円運動
+setInterval(() => {
+    const tip = document.getElementById("magic-tip");
+    const particles = document.querySelectorAll(".magic-particle2");
+
+    
+    if (!window.tipBaseX) return;
+
+    angle += 0.1;
+    const x = window.tipBaseX + Math.cos(angle) * radius;
+    const y = window.tipBaseY + Math.sin(angle) * radius;
+
+    tip.style.left = x + "px";
+    tip.style.top  = y + "px";
+
+    // パーティクル発生
+    spawnParticle(x, y);
+}, 16);
+
+// ======== パーティクルエフェクト ========
+function spawnParticle(x, y) {
+    const container = document.getElementById("magic-particles");
+    const particle = document.createElement("div");
+    particle.className = "particle";
+
+
+    // ランダム方向
+    const angle = Math.random() * 2 * Math.PI;
+    const speed = Math.random() * 2 + 1;
+
+    particle.style.left = x + "px";
+    particle.style.top  = y + "px";
+    particle.style.setProperty("--dx", Math.cos(angle) * speed + "px");
+    particle.style.setProperty("--dy", Math.sin(angle) * speed + "px");
+
+    container.appendChild(particle);
+
+    // 数秒で消す
+    setTimeout(() => particle.remove(), 1000);
+}
+
+
+// document.addEventListener("mousemove", (e) => {
+//   const stick = document.getElementById("cursor-stick");
+//   stick.style.left = e.pageX + "px";
+//   stick.style.top  = e.pageY + "px";
+// });
+
+</script>
+
+
+        <h1>KS903 PWA</h1>
+<p>Android/iOS両方でQRからアクセス可能。アプリっぽく使えます。</p>
+    
+    
+
+</body>
+</html>

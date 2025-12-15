@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS903 JS完全版 (MediaPipe Tasks)</title>
+    
+    <link rel="stylesheet" href="imasan_style.css">
+    <style>
+        /* CSSでキャンバスをビデオの上に重ねて配置し、ビデオを隠します */
+        #container {
+            position: relative;
+            width: 640px; /* ビデオの解像度に合わせる */
+            height: 480px;
+            margin: 20px auto;
+            transform: scaleX(-1); /* 鏡像表示 */
+        }
+        #webcam {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0; /* 映像を見せない (Canvasに描画するため) */
+        }
+        #output_canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 検出結果の描画先 */
+        }
+        #status {
+            margin-top: 10px;
+            font-size: 16px;
+            text-align: center;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <video id="webcam" autoplay playsinline></video> 
+        <canvas id="output_canvas" width="640" height="480"></canvas>
+    </div>
+
+    <div id="status">Loading MediaPipe model...</div>
+    
+    <h1>KS903 PWA (JS完全版)</h1>
+    <p>手で魔法のステッキを動かそう！ (ブラウザ内処理)</p>
+    
+    <script type="module" src="app.js"></script>
+    
+</body>
+</html>

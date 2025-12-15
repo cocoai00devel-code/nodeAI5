@@ -1,0 +1,352 @@
+/* imasan_style.css */
+/* <style> */
+/* ================================================= */
+/* 共通設定 */
+/* ================================================= */
+body {
+  /* cursor: crosshair; cursor: pointer; cursor: grab; */
+  /* デフォルトのカーソルを消す */
+  cursor: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #a0d8ef; /* 明るい背景色を維持 */
+  font-family: sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* #cursor-stick {
+  position: fixed;
+  width: 20px;
+  height: 80px;
+  background: linear-gradient(to bottom, white, black);
+  border-radius: 5px;
+  pointer-events: none;
+  transform: rotate(20deg);
+} */
+
+/* 全体のステッキ位置制御 */
+#magic-stick, #magic-tip {
+  position: absolute;
+  pointer-events: none; /* カーソル邪魔しない */
+}
+
+/* 魔法少女ステッキ本体 */
+#magic-stick {
+  width: 140px;
+  height: 12px; /* 細めに */
+  /* border-radius: 999px; */
+  background: linear-gradient(90deg, #c39bff 0%, #ffb3ec 50%, #ff7ada 100% );
+  border-radius: 999px;/* 6px; */
+  pointer-events: none;
+  /* 回転中心を右側へ変更！！ */
+  transform-origin: right center; /* ← これ超重要 */
+  /* 回転中心を右側へ変更！！ */
+  transform: rotate(-30deg); /* 斜めの自然な角度 */
+  box-shadow: 0 0 6px rgba(255, 140, 255, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.8);
+  /* tipの位置を基準に、ステッキ本体を配置調整 */
+  left: -120px; 
+  top: 12px;
+}
+
+/* ステッキ先端：光る丸 */
+/* ★先端の光る丸を小さく調整して自然に */
+#magic-tip {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  pointer-events: none;
+  /* 星形（CSS clip-path） */
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+  background: radial-gradient(circle, #fff7ff 0%, #ffe3ff 40%, #ff9bff 70%, #ff47d8 100% );
+  box-shadow: 0 0 12px #ff9bff, 0 0 22px #ff47d8, 0 0 45px #ff47d8;
+  animation: tip-rainbow 1.8s linear infinite;
+  pointer-events: none;
+  z-index: 999;
+  /* tipの中心が(0,0)になるように調整 */
+  transform: translate(-50%, -50%);
+}
+
+/* 星の色がゆっくり変化する */
+/* ステッキ本体が虹色に流れる */
+@keyframes stick-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+/* フィードバック用の表示 */
+#feedback-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4em;
+    color: #ff007f;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    z-index: 101;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* フェードアウト用クラス */
+.hidden {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* 一応操作不能に */
+}
+/* クリック時のフィードバック */
+.show-feedback {
+    opacity: 1 !important;
+}
+
+.hidden-particle {
+  opacity: 0 !important;
+  transform: scale(0) !important;
+  pointer-events: none !important;
+  transition: opacity 0.2s linear;
+}
+
+/* 光の粒：滲む虹色 */
+.magic-particle2 {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, white, gold, orange);
+  opacity: 0.9;
+  filter: blur(2px);
+  animation: sparkle 1s infinite;
+  z-index: 1000;
+}
+
+/* キラキラアニメ */
+@keyframes sparkle {
+  0% { transform: scale(1) translate(0,0); opacity: 1; filter: blur(2px); }
+  50% { transform: scale(1.5) translate(var(--dx,0), var(--dy,0)); opacity: 0.6; filter: blur(4px); }
+  100% { transform: scale(1) translate(0,0); opacity: 1; filter: blur(2px); }
+}
+
+/* 星の色がゆっくり変化する */
+/* 先端の光が虹色にドクンドクン */
+@keyframes tip-rainbow {
+  0% { filter: hue-rotate(0deg) brightness(1.1); transform: scale(1); }
+  50% { filter: hue-rotate(180deg) brightness(1.4); transform: scale(1.05); }
+  100% { filter: hue-rotate(360deg) brightness(1.1); transform: scale(1.15); }
+}
+
+/* パーティクル */
+#magic-particles .particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle,#fff7ff,#ff47d8);
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+  pointer-events:none;
+  animation: moveParticle 1s linear forwards;
+}
+
+@keyframes moveParticle {
+  to {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity:0;
+  }
+}
+
+/* 魔法ステッキ本体 */
+/* #magic-stick {
+  position: fixed;
+  width: 6px;
+  height: 60px;
+  background: linear-gradient(to bottom, #fff, #222);
+  border-radius: 3px;
+  pointer-events: none;
+  transform-origin: top left;
+  transform: rotate(25deg);
+  z-index: 99999;
+}
+
+/* ステッキの先端（魔法の光） */
+/* #magic-tip {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle, white, gold, orange);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-4px, -4px);
+  animation: sparkle 1s infinite;
+  z-index: 99999;
+} */
+
+/* キラキラ */
+/* @keyframes sparkle {
+  0% { transform: translate(-4px, -4px) scale(1); }
+  50% { transform: translate(-4px, -4px) scale(1.3); }
+  100% { transform: translate(-4px, -4px) scale(1); }
+} */
+
+#svg-container {
+  margin-bottom: 20px;
+}
+
+/* ================================================= */
+/* 目のアニメーション（キョロキョロ） */
+/* ================================================= */
+.iris {
+  transform-box: fill-box;
+  transform-origin: center;
+  /* レインボー色変化用 */
+  transition: fill 0.3s linear;
+  /* animation-name: look;← JSで制御するため削除  */ /* ← これを削除 */
+  animation-duration: 2s; /* キョロキョロアニメのdurationを流用 */
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transform: translateX(0);
+}
+
+/* @keyframes look: 横に動かしてキョロキョロを表現 */
+@keyframes look {
+  0% { transform: translateX(0px); }
+  50% { transform: translateX(5px); }
+  100% { transform: translateX(-5px); }
+}
+
+/* @keyframes rainbow-cycle は使用しませんが、定義は維持します */
+@keyframes rainbow-cycle {
+  0% { background-color: red; }
+  16% { background-color: orange; }
+  33% { background-color: yellow; }
+  50% { background-color: green; }
+  66% { background-color: blue; }
+  83% { background-color: indigo; }
+  100% { background-color: violet; }
+}
+
+/* ================================================= */
+/* 🌈 流れる虹色アニメーション定義 ( shine ) */
+/* ================================================= */
+/* ================================================= */
+/* 🌈 流れる虹色アニメーション定義 ( shine & flow-gradient ) */
+/* ================================================= */
+
+/* HTML要素の背景を流すキーフレーム ( .rainbow-box 用) */
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* SVGグラデーションを流すキーフレーム ( <linearGradient> 用) */
+@keyframes flow-gradient {
+  0% { transform: translate(-50%, 0); }
+  100% { transform: translate(50%, 0); }
+}
+
+/* SVGの<linearGradient>要素に適用されるクラス */
+.flow-rainbow {
+  animation: flow-gradient 8s linear infinite alternate; /* alternateで往復させて途切れを防ぐ */
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ★ .rainbow-box の定義を修正・統合しました */
+.rainbow-box {
+  /* サイズ設定 */
+  width: 300px;
+  height: 150px;
+  border-radius: 15px;
+
+  /* 1. 虹色のグラデーションを設定 (90度=横方向) */
+  background: linear-gradient(
+    90deg, 
+    #ff0000, /* Red */
+    #ff7f00, /* Orange */
+    #ffff00, /* Yellow */
+    #00ff00, /* Green */
+    #0000ff, /* Blue */
+    #4b0082, /* Indigo */
+    #9400d3, /* Violet */
+    #ff0000 /* ループのために赤を再度追加 */
+  );
+
+  /* 2. グラデーションのサイズを要素の2倍に広げる */
+  background-size: 200% 100%;
+
+  /* 3. アニメーションを適用: 8秒で無限に流れる */
+  animation: shine 8s linear infinite;
+
+  /* 見栄えのための影 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* SVGの<linearGradient>要素に適用されるクラス */
+.flow-rainbow {
+  /* グラデーション要素自体を動かすアニメーションを適用 */
+  animation: flow-gradient 8s linear infinite alternate;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#nose {
+  transition: filter 0.2s linear;
+}
+
+#nose:hover {
+  cursor: crosshair;
+}
+
+.rainbow-flow {
+  animation: rainbow 2s linear infinite;
+}
+
+@keyframes rainbow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* SVGグラデーションを流すキーフレーム ( <linearGradient> 用) */
+@keyframes flow-gradient {
+  0% { transform: translate(-50%, 0); }
+  100% { transform: translate(50%, 0); }
+}
+
+/* ================================================= */
+/* その他のスタイル */
+/* ================================================= */
+.svg-title {
+  font-size: 24px;
+  color: #0a74da;
+  margin-bottom: 10px;
+}
+
+/* ================================================= */
+/* その他のスタイル */
+/* ================================================= */
+h1 { margin:0; font-size:24px; color:#0a74da; }
+p { font-size:16px; color:#333; text-align:center; max-width:300px; }
+/* </style> */
